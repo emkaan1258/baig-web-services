@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* Design tokens carried over 1:1 from the original project's :root variables */
+@theme {
+  --color-navy: #0e2a47;
+  --color-navy-2: #163a5f;
+  --color-sky: #1d7fd6;
+  --color-sky-soft: #e7f1fb;
+  --color-amber: #f0a500;
+  --color-amber-hover: #ffb71a;
+  --color-ink: #1a2230;
+  --color-muted: #5a6473;
+  --color-line: #dde3ec;
+  --color-soft: #f6f8fb;
+  --color-ok: #1f7a4d;
+  --color-err: #b23a2a;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --shadow-card: 0 10px 30px -16px rgba(14, 42, 71, 0.35);
+
+  /* Original responsive breakpoints: 720px (mobile) and 920px (tablet) */
+  --breakpoint-sm: 45rem;
+  --breakpoint-md: 57.5rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    background: #fff;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a {
+    color: var(--color-sky);
+  }
+  img,
+  svg {
+    max-width: 100%;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  /* Tailwind's reset removes default heading weight; the original design relied on bold headings */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 700;
+  }
+  h1,
+  h2,
+  h3 {
+    line-height: 1.2;
+    color: var(--color-navy);
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    letter-spacing: -0.02em;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-sky);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Legal / long-form pages (original .prose) */
+  .prose-legal {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 22px;
+  }
+  .prose-legal h2 {
+    margin: 32px 0 12px;
+  }
+  .prose-legal p,
+  .prose-legal li {
+    color: #33404f;
+  }
+  .prose-legal ul {
+    margin: 0 0 1rem 1.2rem;
+    list-style: disc;
+  }
+  .prose-legal li {
+    margin-bottom: 0.4rem;
+  }
+  .prose-legal .updated {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  /* FAQ <details> marker (original .faq) */
+  .faq summary {
+    list-style: none;
+  }
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq summary::after {
+    content: "+";
+    font-size: 1.3rem;
+    color: var(--color-sky);
+  }
+  .faq details[open] summary::after {
+    content: "−";
+  }
+
+  /* numbered step cards (original .stepc counter) */
+  .steps-grid {
+    counter-reset: s;
+  }
+  .stepc::before {
+    counter-increment: s;
+    content: "0" counter(s);
+    font-weight: 800;
+    color: var(--color-sky);
+    font-size: 1.4rem;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
